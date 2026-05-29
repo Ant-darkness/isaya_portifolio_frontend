@@ -1,11 +1,124 @@
 @import "tailwindcss";
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
-    background: black;
+    background: #05010d;
     color: white;
-    font-family: sans-serif;
+    font-family: Inter, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ROOT APP */
+#root {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* PAGE SAFE AREA */
+.page-container {
+    width: 100%;
+    min-height: 100vh;
+
+    /* HII NDIO FIX YA NAVBAR */
+    padding-top: 120px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* RESPONSIVE ZOOM SAFETY */
+.section-spacing {
+    padding-left: clamp(1rem, 4vw, 3rem);
+    padding-right: clamp(1rem, 4vw, 3rem);
+}
+
+/* FLEXIBLE HEADINGS */
+.responsive-title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 1.1;
+}
+
+.responsive-subtitle {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+}
+
+/* SAFE TEXT */
+.responsive-text {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    line-height: 1.9;
+}
+
+/* GLOBAL BUTTON STYLE */
+.primary-btn {
+    min-width: 180px;
+    height: 56px;
+    padding-inline: 24px;
+
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+/* GLOBAL CARD */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    /* Safari Support */
+    -webkit-backdrop-filter: blur(10px);
+
+    /* Modern Browsers */
+    backdrop-filter: blur(10px);
+
+    border-radius: 24px;
+}
+
+/* IMAGES */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* LINKS */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7e22ce;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0b0218;
+}
+
+/* SELECTION */
+::selection {
+    background: #9333ea;
+    color: white;
 }

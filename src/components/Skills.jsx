@@ -2,20 +2,33 @@ import { motion } from "framer-motion";
 
 export default function Skills({ skills = [] }) {
   return (
-    <section id="skills" className="py-32 px-6">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl font-black mb-16 text-center">
-          Skills
-        </h2>
+    <section className="min-h-screen py-36 px-6 bg-[#070111] flex items-center">
+      <div className="max-w-6xl mx-auto w-full">
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl font-black">
+            Skills
+          </h2>
+
+          <p className="text-gray-400 mt-4 text-lg">
+            Technologies and tools I use for building scalable systems.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-6">
           {skills.map((skill, index) => (
             <motion.div
-              whileHover={{ scale: 1.05 }}
               key={index}
-              className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-lg hover:border-cyan-400 transition"
+              whileHover={{ y: -5 }}
+              className="w-full sm:w-[280px] rounded-3xl border border-white/10 bg-white/5 p-8 hover:border-purple-500/40 transition-all duration-300"
             >
-              <h3 className="text-2xl font-bold">{skill}</h3>
+              <h3 className="text-2xl font-bold text-white text-center">
+                {skill}
+              </h3>
+
+              <p className="mt-5 text-gray-400 leading-7 text-center">
+                Professional development experience using {skill} for modern applications.
+              </p>
             </motion.div>
           ))}
         </div>

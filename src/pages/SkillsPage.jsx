@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
-
 import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
+import Skills from "../components/Skills";
 
-export default function Home() {
+export default function SkillsPage() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -13,22 +12,12 @@ export default function Home() {
       .catch((err) => console.log(err));
   }, []);
 
-  if (!data) {
-    return (
-      <div className="h-screen flex items-center justify-center bg-[#05010d] text-white text-2xl">
-        Loading Portfolio...
-      </div>
-    );
-  }
+  if (!data) return null;
 
   return (
     <div className="page-container bg-[#05010d] text-white">
       <Navbar profile={data.profile} />
-  
-      <Hero
-        profile={data.profile}
-        contact={data.contact}
-      />
+      <Skills skills={data.skills} />
     </div>
   );
 }
