@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { link } from "react-router-dom";
 import {
   FaGithub,
   FaLinkedin,
@@ -62,19 +63,19 @@ export default function Hero({ profile = {}, contact = {} }) {
           transition={{ delay: 0.8 }}
           className="flex flex-wrap justify-center gap-5 mt-10"
         >
-          <a
-            href="/projects"
-            className="min-w-[180px] h-14 px-8 rounded-xl bg-purple-600 hover:bg-purple-700 transition-all duration-300 flex items-center justify-center font-semibold text-base"
+          <Link
+            to="/projects"
+            className="min-w-[180px] h-14 px-8 rounded-xl bg-green-600 hover:bg-purple-700 transition-all duration-300 flex items-center justify-center font-semibold text-base"
           >
             View Projects
-          </a>
+          </Link>
 
-          <a
-            href="/contact"
-            className="min-w-[180px] h-14 px-8 rounded-xl border border-purple-500/40 hover:bg-purple-500/10 transition-all duration-300 flex items-center justify-center font-semibold text-base"
+          <Link
+            to="/contact"
+            className="min-w-[180px] h-14 px-8 rounded-xl bg-green-600 border border-purple-500/40 hover:bg-gren-500/10 transition-all duration-300 flex items-center justify-center font-semibold text-base"
           >
             Contact Me
-          </a>
+          </Link>
         </motion.div>
 
         <div className="flex justify-center items-center gap-4 mt-10 flex-wrap">
