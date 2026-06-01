@@ -1,115 +1,143 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { HiArrowRight } from "react-icons/hi";
+import { BsPersonBoundingBox } from "react-icons/bs";
 
 export default function Hero({ profile = {}, contact = {} }) {
   return (
-    <section className="min-h-screen bg-[#05010d] relative overflow-hidden flex items-center justify-center pt-36 pb-20 px-6">
-
-      <div className="absolute top-[-120px] left-[-120px] w-[350px] h-[350px] bg-purple-700/20 rounded-full blur-[120px]" />
-
-      <div className="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] bg-fuchsia-600/10 rounded-full blur-[120px]" />
-
-      <div className="max-w-5xl mx-auto relative z-10 text-center">
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="flex justify-center"
-        >
-          <img
-            src={profile.image}
-            alt="profile"
-            className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-purple-500/30 shadow-2xl"
-          />
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mt-10 text-5xl md:text-7xl font-black leading-tight text-white break-words"
-        >
-          {profile.name}
-        </motion.h1>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mt-5 text-2xl md:text-3xl font-bold text-purple-300"
-        >
-          {profile.title}
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mt-8 text-gray-400 leading-8 text-lg max-w-3xl mx-auto"
-        >
-          {profile.bio}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="flex flex-wrap justify-center gap-5 mt-10"
-        >
-          <Link
-            to="/projects"
-            className="min-w-[180px] h-14 px-8 rounded-xl bg-green-600 hover:bg-purple-700 transition-all duration-300 flex items-center justify-center font-semibold text-base"
+    <section className="hero-section section-space">
+      <div className="container-responsive" style={{ width: "100%" }}>
+        <div className="hero-grid">
+          {/* LEFT */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
           >
-            View Projects
-          </Link>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1.25rem" }}>
+              <span className="pink-dot" />
+              <span
+                style={{
+                  fontSize: "0.78rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "var(--muted)",
+                }}
+              >
+                Available for opportunities
+              </span>
+            </div>
 
-          <Link
-            to="/contact"
-            className="min-w-[180px] h-14 px-8 rounded-xl bg-green-600 border border-purple-500/40 hover:bg-gren-500/10 transition-all duration-300 flex items-center justify-center font-semibold text-base"
+            <h1 className="hero-name">
+              Hello, I'm <br />
+              <span>{profile.name || "ISAYA MKUMBO"}</span>
+            </h1>
+
+            <p className="hero-title">{profile.title || "Data Science Student"}</p>
+
+            <p className="hero-bio">{profile.bio}</p>
+
+            {profile.location && (
+              <p
+                style={{
+                  color: "var(--muted)",
+                  fontSize: "0.82rem",
+                  marginTop: "0.75rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.35rem",
+                }}
+              >
+                📍 {profile.location}
+              </p>
+            )}
+
+            {/* CTA buttons */}
+            <div className="flex-wrap-gap" style={{ marginTop: "2rem" }}>
+              <Link to="/projects" className="btn-primary">
+                View Projects <HiArrowRight />
+              </Link>
+              <Link to="/contact" className="btn-secondary">
+                Contact Me
+              </Link>
+            </div>
+
+            {/* Social icons */}
+            <div className="flex-wrap-gap" style={{ marginTop: "1.75rem" }}>
+              {contact.github && (
+                <a
+                  href={contact.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-btn"
+                  title="GitHub"
+                >
+                  <FaGithub />
+                </a>
+              )}
+              {contact.linkedin && (
+                <a
+                  href={contact.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-btn"
+                  title="LinkedIn"
+                >
+                  <FaLinkedin />
+                </a>
+              )}
+              {contact.email && (
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="social-btn"
+                  title="Email"
+                >
+                  <MdEmail />
+                </a>
+              )}
+              {contact.whatsapp && (
+                <a
+                  href={`https://wa.me/${contact.whatsapp}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-btn"
+                  title="WhatsApp"
+                >
+                  <FaWhatsapp />
+                </a>
+              )}
+            </div>
+          </motion.div>
+
+          {/*RIGHT - Avatar
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            Contact Me
-          </Link>
-        </motion.div>
-
-        <div className="flex justify-center items-center gap-4 mt-10 flex-wrap">
-
-          <a
-            href={contact.github}
-            target="_blank"
-            className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#24292e] transition-all duration-300"
-          >
-            <FaGithub className="text-lg text-white" />
-          </a>
-
-          <a
-            href={contact.linkedin}
-            target="_blank"
-            className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#0077b5] transition-all duration-300"
-          >
-            <FaLinkedin className="text-lg text-[#0A66C2]" />
-          </a>
-
-          <a
-            href={`mailto:${contact.email}`}
-            className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-600 transition-all duration-300"
-          >
-            <MdEmail className="text-lg text-[#EA4335]" />
-          </a>
-
-          <a
-            href={`https://wa.me/${contact.whatsapp}`}
-            target="_blank"
-            className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] transition-all duration-300"
-          >
-            <FaWhatsapp className="text-lg text-[#25D366]" />
-          </a>
+            {profile.image ? (
+              <img
+                src={profile.image}
+                alt={profile.name}
+                className="hero-avatar"
+              />
+            ) : (
+              <div className="hero-avatar-placeholder">
+                <BsPersonBoundingBox size={48} opacity={0.3} />
+                <span style={{ fontSize: "0.7rem", color: "var(--muted)" }}>
+                  Add profile.jpg<br />to /public
+                </span>
+              </div>
+            )}
+          </motion.div>*/}
         </div>
       </div>
     </section>

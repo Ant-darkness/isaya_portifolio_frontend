@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import Navbar from "../components/Navbar";
 import Skills from "../components/Skills";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function SkillsPage() {
   const [data, setData] = useState(null);
@@ -9,13 +10,13 @@ export default function SkillsPage() {
   useEffect(() => {
     API.get("/portfolio")
       .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }, []);
 
-  if (!data) return null;
+  if (!data) return <LoadingScreen />;
 
   return (
-    <div className="page-container bg-[#05010d] text-white">
+    <div className="page-container">
       <Navbar profile={data.profile} />
       <Skills skills={data.skills} />
     </div>

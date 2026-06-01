@@ -1,75 +1,134 @@
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import { BsImageFill } from "react-icons/bs";
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.4 } },
+};
 
 export default function Projects({ projects = [] }) {
   return (
-    <section className="min-h-screen py-36 px-6 bg-[#05010d]">
-      <div className="max-w-7xl mx-auto">
-
-        <div className="text-center mb-20">
-          <h2 className="text-5xl font-black">
-            Projects
-          </h2>
-
-          <p className="text-gray-400 mt-4 text-lg">
-            Featured projects and systems I have worked on.
-          </p>
+    <section className="section-space">
+      <div className="container-responsive">
+        <div className="section-header">
+          <span className="section-tag">My Work</span>
+          <h2>Featured Projects</h2>
+          <p>Systems and solutions I have built.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div
+          className="projects-grid"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              whileHover={{ y: -6 }}
-              className="rounded-3xl border border-white/10 bg-white/5 p-8 hover:border-purple-500/40 transition-all duration-300"
+              variants={item}
+              className="card"
+              whileHover={{ y: -5 }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
-              <h3 className="text-3xl font-bold text-white leading-tight">
-                {project.name}
-              </h3>
-
-              <p className="mt-6 text-gray-400 leading-8 text-base">
-                {project.description}
-              </p>
-
-              <div className="flex flex-wrap gap-3 mt-8">
-                {project.tech.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm"
-                  >
-                    {tech}
-                  </span>
-                ))}
+              {/* Project image */}
+              <div className="project-img-wrap">
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                ) : (
+                  <div className="project-img-placeholder">
+                    <BsImageFill size={28} />
+                    <span>
+                      Add image: /public/projects/<br />
+                      {project.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}.jpg
+                    </span>
+                  </div>
+                )}
               </div>
 
-              <div className="flex flex-wrap gap-4 mt-8">
+              {/* Content */}
+              <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                <h3 className="project-title">{project.name}</h3>
 
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    className="h-12 px-5 rounded-xl bg-white/10 hover:bg-[#24292e] transition-all duration-300 flex items-center gap-2"
+                <p
+                  style={{
+                    color: "var(--muted)",
+                    fontSize: "clamp(0.82rem, 1vw, 0.92rem)",
+                    lineHeight: 1.75,
+                    marginTop: "0.6rem",
+                    flex: 1,
+                  }}
+                >
+                  {project.description}
+                </p>
+
+                {/* Tech tags */}
+                {project.tech?.length > 0 && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "0.4rem",
+                      marginTop: "1rem",
+                    }}
                   >
-                    <FaGithub />
-                    Github
-                  </a>
+                    {project.tech.map((tech, i) => (
+                      <span key={i} className="tech-tag">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 )}
 
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    className="h-12 px-5 rounded-xl bg-purple-600 hover:bg-purple-700 transition-all duration-300 flex items-center gap-2"
+                {/* Links */}
+                {(project.github || project.live) && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "0.5rem",
+                      marginTop: "1.25rem",
+                    }}
                   >
-                    <FiExternalLink />
-                    Live Demo
-                  </a>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-ghost"
+                      >
+                        <FaGithub /> GitHub
+                      </a>
+                    )}
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-primary"
+                        style={{ padding: "0.45rem 1rem", fontSize: "0.82rem" }}
+                      >
+                        <FiExternalLink /> Live Demo
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
